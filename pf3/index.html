@@ -9,7 +9,12 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'Helvetica Neue', Arial, sans-serif; color: #333; background: #fff; line-height: 1.6; }
 
-    .header { position: fixed; width: 100%; background: #fff; border-bottom: 1px solid #eee; z-index: 999; }
+    .header { position: fixed; width: 100%; background: #fff; border-bottom: 1px solid #eee; z-index: 999; animation: slideDown 0.6s ease-out; }
+    @keyframes slideDown {
+      0% { transform: translateY(-100%); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
     .header-inner { max-width: 1100px; margin: 0 auto; padding: 0.8rem 1rem; display: flex; align-items: center; justify-content: space-between; }
     .logo { text-decoration: none; font-size: 1.5rem; font-weight: bold; color: #333; }
     .nav ul { list-style: none; display: flex; gap: 2rem; }
@@ -20,25 +25,34 @@
     .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
     .hamburger span { display: block; width: 25px; height: 3px; background: #333; border-radius: 2px; transition: all 0.3s; }
 
-    .hero { width: 100%; height: 100vh; background-image: url('https://source.unsplash.com/featured/?coding'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; }
+    .hero { width: 100%; height: 100vh; background-image: url('https://source.unsplash.com/featured/?coding'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; animation: fadeIn 2s ease; }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(1.05); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
     .hero::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); }
     .hero-content { position: relative; z-index: 2; color: #fff; padding: 0 1rem; }
-    .hero-title { font-size: 2.8rem; margin-bottom: 1rem; line-height: 1.3; }
-    .hero-subtitle { font-size: 1.4rem; margin-bottom: 2rem; }
-    .hero .btn { display: inline-block; padding: 0.9rem 1.8rem; font-size: 1.2rem; text-decoration: none; background: #00bfff; color: #fff; border-radius: 5px; transition: transform 0.3s, background 0.3s; }
+    .hero-title { font-size: 2.8rem; margin-bottom: 1rem; line-height: 1.3; animation: slideUp 1s ease; }
+    @keyframes slideUp {
+      0% { transform: translateY(20px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .hero-subtitle { font-size: 1.4rem; margin-bottom: 2rem; animation: slideUp 1.4s ease; }
+    .hero .btn { display: inline-block; padding: 0.9rem 1.8rem; font-size: 1.2rem; text-decoration: none; background: #00bfff; color: #fff; border-radius: 5px; transition: transform 0.3s, background 0.3s; animation: slideUp 1.8s ease; }
     .hero .btn:hover { transform: scale(1.05); background: #008fb3; }
 
     .section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; position: relative; }
     .section-title { font-size: 2.2rem; margin-bottom: 30px; text-align: center; color: #00bfff; }
-    .section-description { text-align: center; margin-bottom: 40px; font-size: 1.2rem; }
     .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
     .fade-in.show { opacity: 1; transform: translateY(0); }
 
-    .about-content p, .profile-content p { margin-bottom: 1.5rem; font-size: 1.2rem; line-height: 1.8; text-align: center; }
     .works-list, .skills-content { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
     .work-item, .skill-box { width: 300px; background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; text-align: center; padding: 20px; transition: transform 0.3s, box-shadow 0.3s; font-size: 1.1rem; }
     .work-item:hover, .skill-box:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
 
+    .profile-content { text-align: center; font-size: 1.1rem; margin-bottom: 30px; }
     .contact-info, .contact-form { text-align: center; margin-bottom: 30px; font-size: 1.1rem; }
     .contact-form input, .contact-form textarea { padding: 8px; font-size: 1.1rem; border: 1px solid #ddd; border-radius: 4px; width: 100%; }
     .contact-form button { padding: 10px; font-size: 1.1rem; background-color: #00bfff; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
@@ -59,8 +73,6 @@
     <a href="#" class="logo">Rational & Honest</a>
     <nav class="nav">
       <ul>
-        <li><a href="#about">自己紹介</a></li>
-        <li><a href="#services">サービス内容</a></li>
         <li><a href="#works">制作実績</a></li>
         <li><a href="#skills">スキル</a></li>
         <li><a href="#profile">プロフィール</a></li>
@@ -81,24 +93,6 @@
   </div>
 </section>
 
-<section id="about" class="section fade-in">
-  <h2 class="section-title">自己紹介</h2>
-  <div class="about-content">
-    <p>私のモットーは<strong>「お互いにメリットがなければビジネスは成り立たない」</strong>です。<br>実績を積むため、<strong>リーズナブルな価格</strong>で幅広い制作を請け負っています。<br>予算を抑えながらも、<strong>オーダーメイドで質の高い成果物</strong>を提供できる。<br>そんな<strong>Win-Win</strong>な関係を一緒に築ければ幸いです。</p>
-    <p>訪問者が<strong>欲しかった情報を適切に得られ、成果につながる設計</strong>を常に心がけています。<br><strong>シンプルかつ目的に合ったデザイン</strong>を大切にしています。</p>
-  </div>
-</section>
-
-<section id="services" class="section fade-in">
-  <h2 class="section-title">サービス内容</h2>
-  <div class="skills-content">
-    <div class="skill-box"><h3>Webページ制作</h3><p>LP制作、WordPressカスタマイズ、レスポンシブ対応</p></div>
-    <div class="skill-box"><h3>バナー・サムネイル制作</h3><p>Photoshop/Illustratorによるデザイン制作</p></div>
-    <div class="skill-box"><h3>動画編集</h3><p>Premiere Proによるカット編集・テロップ挿入対応</p></div>
-    <div class="skill-box"><h3>画像加工</h3><p>Photoshopによるレタッチ・補正作業</p></div>
-  </div>
-</section>
-
 <section id="works" class="section fade-in">
   <h2 class="section-title">制作実績</h2>
   <div class="works-list">
@@ -106,6 +100,21 @@
       <img src="https://source.unsplash.com/random/400x250?website" alt="Project Sample">
       <h3>Project Sample</h3>
       <p>使用技術: HTML/CSS/JavaScript</p>
+    </div>
+    <div class="work-item">
+      <img src="https://source.unsplash.com/random/400x250?landingpage" alt="LP Sample">
+      <h3>LPデザイン</h3>
+      <p>使用技術: HTML/CSS、Photoshop</p>
+    </div>
+    <div class="work-item">
+      <img src="https://source.unsplash.com/random/400x250?banner" alt="Banner Sample">
+      <h3>バナー制作</h3>
+      <p>使用ソフト: Illustrator / Photoshop</p>
+    </div>
+    <div class="work-item">
+      <img src="https://source.unsplash.com/random/400x250?videoediting" alt="動画編集例">
+      <h3>動画編集</h3>
+      <p>使用ソフト: Premiere Pro</p>
     </div>
   </div>
 </section>
@@ -115,7 +124,7 @@
   <div class="skills-content">
     <div class="skill-box"><h3>Web制作</h3><p>HTML5/CSS3/JavaScript<br>（動きのあるサイト）<br>PHP（学習中）、WordPress構築</p></div>
     <div class="skill-box"><h3>デザイン</h3><p>Photoshop®クリエイター能力認定試験 スタンダード<br>Illustrator®クリエイター能力認定試験 スタンダード</p></div>
-    <div class="skill-box"><h3>資格・検定</h3><p>文部科学省後援 色彩検定3級<br>Webクリエイター能力認定試験（HTML5エキスパート）</p></div>
+    <div class="skill-box"><h3>資格・検定</h3><p>文部科学省後援 色彩検定3級<br>Webクリエイター能力認定試験（HTML5エキスパート）<br>ITパスポート（2025年合格）</p></div>
     <div class="skill-box"><h3>動画編集</h3><p>Premiere Pro / After Effects<br>（カット編集・テロップ挿入）</p></div>
     <div class="skill-box"><h3>プログラミング</h3><p>Python</p></div>
   </div>
